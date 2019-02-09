@@ -16,6 +16,7 @@
         android:text="Clock Wallpaper"
         android:onClick="changeWall"
         />
+    
 
 
 </LinearLayout>
