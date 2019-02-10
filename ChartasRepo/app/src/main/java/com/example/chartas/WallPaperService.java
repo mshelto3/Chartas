@@ -7,12 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.IBinder;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.*;
+import java.util.Calendar;
 import java.util.Date;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,17 +25,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import static com.example.chartas.MainActivity.getSetting;
 
 
 public class WallPaperService extends Service {
 
     private int set = 0;
     private int set2 = 0;
-    String des;
 
     @Override
     public IBinder onBind(Intent intent){
@@ -50,14 +42,7 @@ public class WallPaperService extends Service {
         Toast.makeText(getApplicationContext(), "Service created!", Toast.LENGTH_LONG).show();
 
 
-        Boolean WeatherVsTime = getSetting();
-        if(WeatherVsTime) {
-            find_weather();
-            change_weather();
-        }
-        else {
-            checkTime();
-        }
+        find_weather();
 
 
         final Handler h = new Handler();
@@ -65,15 +50,7 @@ public class WallPaperService extends Service {
 
         h.postDelayed(new Runnable(){
             public void run(){
-                Boolean WeatherVsTime = getSetting();
-                if(WeatherVsTime) {
-                    find_weather();
-                    change_weather();
-
-                }
-                else {
-                    checkTime();
-                }
+                find_weather();
                 h.postDelayed(this, delay);
             }
         }, delay);
@@ -151,11 +128,9 @@ public class WallPaperService extends Service {
             @Override
             public void onResponse(JSONObject response){
                 try {
-                    JSONObject main_object = response.getJSONObject("main");
                     JSONArray array = response.getJSONArray("weather");
                     JSONObject object = array.getJSONObject(0);
-                    String temp = String.valueOf(main_object.getDouble("temp"));
-                    des = object.getString("description");
+                    change_weather(object.getString("description"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -171,7 +146,7 @@ public class WallPaperService extends Service {
         queue.add(jor);
     }
 
-    public void change_weather(){
+    public void change_weather(String des){
         if(des.contains("rain")){
             if(set2 != 1) {
                 WallpaperManager wallpaperManager =
@@ -210,6 +185,9 @@ public class WallPaperService extends Service {
                 }
                 set2 = 3;
             }
+        }
+        else if(des.contains("clear")){
+            checkTime();
         }
     }
 }

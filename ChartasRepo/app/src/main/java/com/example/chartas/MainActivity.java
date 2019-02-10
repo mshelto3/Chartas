@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     public void setting(View v){
         Button button = (Button) findViewById(R.id.time);
         WeatherVsTime = !WeatherVsTime;
@@ -66,9 +64,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-    public static Boolean getSetting(){
-        return WeatherVsTime;
-    }
-
 }
