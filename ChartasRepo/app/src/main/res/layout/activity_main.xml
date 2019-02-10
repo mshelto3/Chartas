@@ -10,13 +10,10 @@
     android:gravity = "center">
 
     <Button
-        android:id="@+id/clockWallpaper"
-        android:layout_width="wrap_content"
+        android:id="@+id/time"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clock Wallpaper"
-        android:onClick="checkTime"
+        android:text="Time"
+        android:onClick="setting"
         />
-    
-
-
 </LinearLayout>
