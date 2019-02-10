@@ -7,8 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.IBinder;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.*;
+import java.util.Date;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -54,6 +59,7 @@ public class WallPaperService extends Service {
             checkTime();
         }
 
+
         final Handler h = new Handler();
         final int delay = 60000;
 
@@ -63,6 +69,7 @@ public class WallPaperService extends Service {
                 if(WeatherVsTime) {
                     find_weather();
                     change_weather();
+
                 }
                 else {
                     checkTime();
