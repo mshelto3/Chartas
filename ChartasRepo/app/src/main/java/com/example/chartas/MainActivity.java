@@ -8,7 +8,7 @@ import android.app.WallpaperManager;
 import android.view.View;
 import android.widget.Toast;
 import java.io.IOException;
-import java.util.Calendar
+import java.util.Calendar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.clockWallpaper:
                 Bitmap wall = BitmapFactory.decodeResource(getResources(), R.drawable.wallpaper1);
                 wallpaperManager.setBitmap(wall);
-                Toast.makeText(this,"clock Wallpaper", Toast.LENGTH_SHORT).show();
+                int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                System.out.println(currentHour);
+                Toast.makeText(this,currentHour, Toast.LENGTH_SHORT).show();
                 break;
         }
 
@@ -37,6 +39,4 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    public void
 }
